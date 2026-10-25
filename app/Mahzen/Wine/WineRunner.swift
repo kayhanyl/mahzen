@@ -7,9 +7,9 @@ enum WineError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .engineMissing(let id): "“\(id)” motoru kurulu değil. engine/package.sh ile kurabilirsin."
-        case .failed(let what, let code): "\(what) başarısız oldu (çıkış kodu \(code)). Ayrıntılar loglarda."
-        case .download(let what): "\(what) indirilemedi."
+        case .engineMissing(let id): String(localized: "The “\(id)” engine isn’t installed. Install it with engine/package.sh.")
+        case .failed(let what, let code): String(localized: "\(what) failed (exit code \(code)). See the logs for details.")
+        case .download(let what): String(localized: "Couldn’t download \(what).")
         }
     }
 }
@@ -65,7 +65,7 @@ struct WineRunner: Sendable {
     func initialize() async throws {
         Paths.ensure(bottle.prefix)
         let code = try await run(["wineboot", "--init"], logName: "wineboot")
-        guard code == 0 else { throw WineError.failed("Bottle hazırlama", code) }
+        guard code == 0 else { throw WineError.failed(String(localized: "Setting up the bottle"), code) }
         try await setWindowsVersion(bottle.windowsVersion)
         if bottle.retinaMode { try await setRetinaMode(true) }
         // The registry (system.reg, which isInitialized checks) is only flushed when wineserver exits.
@@ -74,13 +74,13 @@ struct WineRunner: Sendable {
 
     func setWindowsVersion(_ version: WindowsVersion) async throws {
         let code = try await run(["winecfg", "-v", version.rawValue], logName: "winecfg")
-        guard code == 0 else { throw WineError.failed("Windows sürümünü ayarlama", code) }
+        guard code == 0 else { throw WineError.failed(String(localized: "Setting the Windows version"), code) }
     }
 
     func setRetinaMode(_ on: Bool) async throws {
         let code = try await run(["reg", "add", #"HKCU\Software\Wine\Mac Driver"#, "/v", "RetinaMode",
                                   "/t", "REG_SZ", "/d", on ? "y" : "n", "/f"], logName: "retina")
-        guard code == 0 else { throw WineError.failed("Retina modunu ayarlama", code) }
+        guard code == 0 else { throw WineError.failed(String(localized: "Setting Retina mode"), code) }
     }
 
     /// Steam draws its UI with Chromium, which can't present through D3DMetal or DXMT.
@@ -116,7 +116,7 @@ struct WineRunner: Sendable {
         let file = bottle.directory.appending(path: "steam-overrides.reg")
         try reg.write(to: file, atomically: true, encoding: .utf8)
         let code = try await run(["regedit", "/S", file.path], logName: "steam-overrides")
-        guard code == 0 else { throw WineError.failed("Steam ayarları", code) }
+        guard code == 0 else { throw WineError.failed(String(localized: "Steam setup"), code) }
     }
 
     /// Kills every Windows process in the bottle.
@@ -185,8 +185,8 @@ struct WineRunner: Sendable {
         let url = bottle.logs.appending(path: "\(Self.timestamp())-\(Self.fileSafe(logName)).log")
         let header = """
             $ \(executable.lastPathComponent) \(arguments.joined(separator: " "))
-            motor: \(engine.id) (\(engine.wineVersion))
-            klasör: \((directory ?? bottle.directory).path)
+            engine: \(engine.id) (\(engine.wineVersion))
+            directory: \((directory ?? bottle.directory).path)
 
 
             """

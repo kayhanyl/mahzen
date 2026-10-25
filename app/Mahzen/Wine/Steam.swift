@@ -25,7 +25,7 @@ enum Steam {
         let destination = Paths.cache.appending(path: "SteamSetup.exe")
         if FileManager.default.fileExists(atPath: destination.path) { return destination }
         let (temp, response) = try await URLSession.shared.download(from: installerURL)
-        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WineError.download("Steam kurulum dosyası") }
+        guard (response as? HTTPURLResponse)?.statusCode == 200 else { throw WineError.download(String(localized: "the Steam installer")) }
         Paths.ensure(Paths.cache)
         try? FileManager.default.removeItem(at: destination)
         try FileManager.default.moveItem(at: temp, to: destination)

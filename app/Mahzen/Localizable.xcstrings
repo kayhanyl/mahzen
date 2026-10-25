@@ -1,0 +1,955 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ Retina mode is sharper but heavier; keep it off in slow games." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Retina modu keskin ama daha ağırdır; yavaş oyunlarda kapalı tut."
+          }
+        }
+      }
+    },
+    "%@ failed (exit code %d). See the logs for details." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ failed (exit code %2$d). See the logs for details."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ başarısız oldu (çıkış kodu %2$d). Ayrıntılar loglarda."
+          }
+        }
+      }
+    },
+    "%@ · %@" : {
+      "shouldTranslate" : false
+    },
+    "A bottle is a virtual C: drive that Windows programs are installed into. Create your first bottle." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottle, Windows programlarının kurulduğu sanal bir C: sürücüsüdür. İlk bottle’ını oluştur."
+          }
+        }
+      }
+    },
+    "A program is running" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çalışan program var"
+          }
+        }
+      }
+    },
+    "All programs, games and saves in it are deleted permanently." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İçindeki tüm programlar, oyunlar ve kayıtlar kalıcı olarak silinir."
+          }
+        }
+      }
+    },
+    "Applying settings…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar uygulanıyor…"
+          }
+        }
+      }
+    },
+    "Bottle settings" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottle ayarları"
+          }
+        }
+      }
+    },
+    "Bottles" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottle’lar"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vazgeç"
+          }
+        }
+      }
+    },
+    "Close" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kapat"
+          }
+        }
+      }
+    },
+    "Couldn’t download %@." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ indirilemedi."
+          }
+        }
+      }
+    },
+    "Create" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oluştur"
+          }
+        }
+      }
+    },
+    "Create a bottle first." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Önce bir bottle oluşturmalısın."
+          }
+        }
+      }
+    },
+    "Delete Bottle" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottle’ı Sil"
+          }
+        }
+      }
+    },
+    "Delete Bottle…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottle’ı Sil…"
+          }
+        }
+      }
+    },
+    "Delete “%@”?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” silinsin mi?"
+          }
+        }
+      }
+    },
+    "DirectX 10/11 → Metal (open source). Recommended for DirectX 11 games." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DirectX 10/11 → Metal (açık kaynak). DirectX 11 oyunlar için önerilen."
+          }
+        }
+      }
+    },
+    "DirectX 11/12 → Metal (Apple). For DirectX 12 games; some DX11 games crash on it (e.g. Kenshi)." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DirectX 11/12 → Metal (Apple). DirectX 12 oyunlar için; bazı DX11 oyunlarda çöküyor (ör. Kenshi)."
+          }
+        }
+      }
+    },
+    "DirectX → OpenGL. Slow but the most compatible; for older games." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DirectX → OpenGL. Yavaş ama en uyumlu; eski oyunlar için."
+          }
+        }
+      }
+    },
+    "Downloading Steam…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam indiriliyor…"
+          }
+        }
+      }
+    },
+    "Drop to Run" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çalıştırmak için bırak"
+          }
+        }
+      }
+    },
+    "Engine" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motor"
+          }
+        }
+      }
+    },
+    "File Explorer (explorer)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dosya Gezgini (explorer)"
+          }
+        }
+      }
+    },
+    "Found Programs" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bulunan Programlar"
+          }
+        }
+      }
+    },
+    "Games" : {
+      "comment" : "Default name for a new bottle",
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oyunlar"
+          }
+        }
+      }
+    },
+    "General" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Genel"
+          }
+        }
+      }
+    },
+    "Graphics" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grafik"
+          }
+        }
+      }
+    },
+    "Graphics layer" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grafik katmanı"
+          }
+        }
+      }
+    },
+    "Install Steam" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam’i Kur"
+          }
+        }
+      }
+    },
+    "Installing Steam…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam kuruluyor…"
+          }
+        }
+      }
+    },
+    "Launch arguments" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlatma argümanları"
+          }
+        }
+      }
+    },
+    "Logs appear here when you run a program in this bottle." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu bottle’da bir program çalıştırdığında logu burada görünür."
+          }
+        }
+      }
+    },
+    "MSync" : {
+      "shouldTranslate" : false
+    },
+    "MSync handles Windows synchronization in the macOS kernel and speeds up most games. Verbose logging helps when tracking down a problem but can slow programs down." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MSync, Windows senkronizasyonunu macOS çekirdeğinde yapar ve çoğu oyunu hızlandırır. Ayrıntılı log sorun ararken işe yarar ama programları yavaşlatabilir."
+          }
+        }
+      }
+    },
+    "Mahzen" : {
+      "shouldTranslate" : false
+    },
+    "Mahzen runs Windows programs with a Wine engine you build yourself. To build and install it, run these in the engine folder:\nfetch.sh → deps.sh → build-wine.sh → build-dxvk.sh → package.sh\n\nEngines are installed to:\n%@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mahzen, Windows programlarını senin derlediğin bir Wine motoruyla çalıştırır. Motoru derleyip kurmak için engine klasöründe şunları çalıştır:\nfetch.sh → deps.sh → build-wine.sh → build-dxvk.sh → package.sh\n\nMotorlar şuraya kurulur:\n%@"
+          }
+        }
+      }
+    },
+    "Metal HUD (FPS counter)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Metal HUD (FPS göstergesi)"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ad"
+          }
+        }
+      }
+    },
+    "New Bottle" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni Bottle"
+          }
+        }
+      }
+    },
+    "New Bottle…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni Bottle…"
+          }
+        }
+      }
+    },
+    "No Engine Installed" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motor kurulu değil"
+          }
+        }
+      }
+    },
+    "No Engines" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motor yok"
+          }
+        }
+      }
+    },
+    "No Logs" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log yok"
+          }
+        }
+      }
+    },
+    "No engine is installed for this layer." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu katman için motor kurulu değil."
+          }
+        }
+      }
+    },
+    "No games installed yet. Open Steam and install one, and it will show up here." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kurulu oyun yok. Steam’i açıp bir oyun kurduğunda burada görünecek."
+          }
+        }
+      }
+    },
+    "No pinned programs. Pin one from the list below, or open an .exe with “Run Program…”." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sabitlenmiş program yok. Aşağıdan bir program sabitle ya da “Program Çalıştır…” ile bir .exe aç."
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamam"
+          }
+        }
+      }
+    },
+    "Open C: Drive in Finder" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "C: Sürücüsünü Finder’da Aç"
+          }
+        }
+      }
+    },
+    "Open Folder" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klasörü Aç"
+          }
+        }
+      }
+    },
+    "Open Steam" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam’i Aç"
+          }
+        }
+      }
+    },
+    "Performance and Debugging" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Performans ve hata ayıklama"
+          }
+        }
+      }
+    },
+    "Pin" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sabitle"
+          }
+        }
+      }
+    },
+    "Pin to Programs" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programlara sabitle"
+          }
+        }
+      }
+    },
+    "Play %@" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ oyununu başlat"
+          }
+        }
+      }
+    },
+    "Preparing Steam…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam hazırlanıyor…"
+          }
+        }
+      }
+    },
+    "Programs" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Programlar"
+          }
+        }
+      }
+    },
+    "Registry Editor (regedit)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kayıt Defteri (regedit)"
+          }
+        }
+      }
+    },
+    "Reload" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yenile"
+          }
+        }
+      }
+    },
+    "Remove from Programs" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sabitlemeyi kaldır"
+          }
+        }
+      }
+    },
+    "Retina mode" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retina modu"
+          }
+        }
+      }
+    },
+    "Run" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlat"
+          }
+        }
+      }
+    },
+    "Run Program…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Program Çalıştır…"
+          }
+        }
+      }
+    },
+    "Run an .exe or .msi file" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir .exe veya .msi dosyası çalıştır"
+          }
+        }
+      }
+    },
+    "Running" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çalışıyor"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaydet"
+          }
+        }
+      }
+    },
+    "Select a Bottle" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottle seç"
+          }
+        }
+      }
+    },
+    "Select a bottle on the left." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soldan bir bottle seç."
+          }
+        }
+      }
+    },
+    "Set Up" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hazırla"
+          }
+        }
+      }
+    },
+    "Setting Retina mode" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retina modunu ayarlama"
+          }
+        }
+      }
+    },
+    "Setting the Windows version" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Windows sürümünü ayarlama"
+          }
+        }
+      }
+    },
+    "Setting up the bottle" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottle hazırlama"
+          }
+        }
+      }
+    },
+    "Setting up the bottle… (the first time can take a minute)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottle hazırlanıyor… (ilk seferde bir dakika sürebilir)"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar"
+          }
+        }
+      }
+    },
+    "Show Logs" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logları Göster"
+          }
+        }
+      }
+    },
+    "Show in Finder" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finder’da Göster"
+          }
+        }
+      }
+    },
+    "Something went wrong" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir sorun oluştu"
+          }
+        }
+      }
+    },
+    "Steam" : {
+      "shouldTranslate" : false
+    },
+    "Steam installation" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam kurulumu"
+          }
+        }
+      }
+    },
+    "Steam isn’t installed in this bottle." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam bu bottle’da kurulu değil."
+          }
+        }
+      }
+    },
+    "Steam setup" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam ayarları"
+          }
+        }
+      }
+    },
+    "Stop All" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tümünü Durdur"
+          }
+        }
+      }
+    },
+    "Stopping…" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durduruluyor…"
+          }
+        }
+      }
+    },
+    "Task Manager (taskmgr)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görev Yöneticisi (taskmgr)"
+          }
+        }
+      }
+    },
+    "The “%@” engine isn’t installed. Install it with engine/package.sh." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” motoru kurulu değil. engine/package.sh ile kurabilirsin."
+          }
+        }
+      }
+    },
+    "This bottle hasn’t been set up yet." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu bottle henüz hazırlanmamış."
+          }
+        }
+      }
+    },
+    "Tools" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Araçlar"
+          }
+        }
+      }
+    },
+    "Unpin" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaldır"
+          }
+        }
+      }
+    },
+    "Verbose logging" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayrıntılı log"
+          }
+        }
+      }
+    },
+    "Which bottle should these %lld files run in?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld dosya hangi bottle’da çalışsın?"
+          }
+        }
+      }
+    },
+    "Which bottle should “%@” run in?" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@” hangi bottle’da çalışsın?"
+          }
+        }
+      }
+    },
+    "Windows version" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Windows sürümü"
+          }
+        }
+      }
+    },
+    "Wine Configuration (winecfg)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wine Ayarları (winecfg)"
+          }
+        }
+      }
+    },
+    "Wine Tools" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wine araçları"
+          }
+        }
+      }
+    },
+    "engine/package.sh installs engines into %@." : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "engine/package.sh motorları %@ klasörüne kurar."
+          }
+        }
+      }
+    },
+    "the Steam installer" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Steam kurulum dosyası"
+          }
+        }
+      }
+    },
+    "… (showing only the last 512 KB)" : {
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "… (yalnızca son 512 KB gösteriliyor)"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

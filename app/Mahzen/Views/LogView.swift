@@ -24,8 +24,8 @@ struct LogView: View {
 
                 Group {
                     if selected == nil {
-                        ContentUnavailableView("Log yok", systemImage: "doc.text",
-                                               description: Text("Bu bottle'da bir program çalıştırdığında logu burada görünür."))
+                        ContentUnavailableView("No Logs", systemImage: "doc.text",
+                                               description: Text("Logs appear here when you run a program in this bottle."))
                     } else {
                         ScrollView([.vertical, .horizontal]) {
                             Text(text)
@@ -41,11 +41,11 @@ struct LogView: View {
 
             Divider()
             HStack {
-                Button("Yenile", systemImage: "arrow.clockwise") { reload() }
+                Button("Reload", systemImage: "arrow.clockwise") { reload() }
                     .keyboardShortcut("r")
-                Button("Finder'da Göster", systemImage: "folder") { store.reveal(bottle.logs) }
+                Button("Show in Finder", systemImage: "folder") { store.reveal(bottle.logs) }
                 Spacer()
-                Button("Kapat") { dismiss() }
+                Button("Close") { dismiss() }
                     .keyboardShortcut(.cancelAction)
             }
             .padding(12)
@@ -74,6 +74,6 @@ struct LogView: View {
         try? handle.seek(toOffset: start)
         let data = (try? handle.readToEnd()) ?? Data()
         let body = String(decoding: data, as: UTF8.self)
-        text = start > 0 ? "… (yalnızca son 512 KB gösteriliyor)\n\n" + body : body
+        text = start > 0 ? String(localized: "… (showing only the last 512 KB)") + "\n\n" + body : body
     }
 }

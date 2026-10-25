@@ -14,7 +14,7 @@ struct MahzenApp: App {
         }
         .commands {
             CommandGroup(replacing: .newItem) {
-                Button("Yeni Bottle…") { delegate.store.showingNewBottle = true }
+                Button("New Bottle…") { delegate.store.showingNewBottle = true }
                     .keyboardShortcut("n")
                     .disabled(delegate.store.engines.isEmpty)
             }

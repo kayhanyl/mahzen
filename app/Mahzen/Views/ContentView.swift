@@ -7,7 +7,7 @@ struct ContentView: View {
         @Bindable var store = store
         NavigationSplitView {
             List(selection: $store.selection) {
-                Section("Bottle'lar") {
+                Section("Bottles") {
                     ForEach(store.bottles) { bottle in
                         BottleRow(bottle: bottle).tag(bottle.id)
                     }
@@ -18,7 +18,7 @@ struct ContentView: View {
                 Button {
                     store.showingNewBottle = true
                 } label: {
-                    Label("Yeni Bottle", systemImage: "plus.circle.fill")
+                    Label("New Bottle", systemImage: "plus.circle.fill")
                 }
                 .buttonStyle(.borderless)
                 .disabled(store.engines.isEmpty)
@@ -33,13 +33,15 @@ struct ContentView: View {
                     .id(bottle.id)
             } else {
                 ContentUnavailableView {
-                    Label("Bottle seç", systemImage: "wineglass")
+                    Label("Select a Bottle", systemImage: "wineglass")
                 } description: {
-                    Text(store.bottles.isEmpty
-                         ? "Bottle, Windows programlarının kurulduğu sanal bir C: sürücüsüdür. İlk bottle'ını oluştur."
-                         : "Soldan bir bottle seç.")
+                    if store.bottles.isEmpty {
+                        Text("A bottle is a virtual C: drive that Windows programs are installed into. Create your first bottle.")
+                    } else {
+                        Text("Select a bottle on the left.")
+                    }
                 } actions: {
-                    Button("Yeni Bottle") { store.showingNewBottle = true }
+                    Button("New Bottle") { store.showingNewBottle = true }
                 }
             }
         }
@@ -47,8 +49,8 @@ struct ContentView: View {
         .sheet(isPresented: Binding(get: { !store.pendingOpen.isEmpty }, set: { if !$0 { store.pendingOpen = [] } })) {
             OpenWithView()
         }
-        .alert("Bir sorun oluştu", isPresented: Binding(get: { store.errorMessage != nil }, set: { if !$0 { store.errorMessage = nil } })) {
-            Button("Tamam", role: .cancel) {}
+        .alert("Something went wrong", isPresented: Binding(get: { store.errorMessage != nil }, set: { if !$0 { store.errorMessage = nil } })) {
+            Button("OK", role: .cancel) {}
         } message: {
             Text(store.errorMessage ?? "")
         }
@@ -74,7 +76,7 @@ private struct BottleRow: View {
                 ProgressView().controlSize(.small)
             } else if store.isRunning(bottle) {
                 Circle().fill(.green).frame(width: 8, height: 8)
-                    .help("Çalışan program var")
+                    .help("A program is running")
             }
         }
         .padding(.vertical, 2)
@@ -86,20 +88,20 @@ private struct NoEnginesView: View {
 
     var body: some View {
         ContentUnavailableView {
-            Label("Motor kurulu değil", systemImage: "shippingbox")
+            Label("No Engine Installed", systemImage: "shippingbox")
         } description: {
             Text("""
-                Mahzen, Windows programlarını kendi derlediği Wine motoruyla çalıştırır. \
-                Motoru derleyip kurmak için engine klasöründe şunları çalıştır:
+                Mahzen runs Windows programs with a Wine engine you build yourself. \
+                To build and install it, run these in the engine folder:
                 fetch.sh → deps.sh → build-wine.sh → build-dxvk.sh → package.sh
 
-                Motorlar şuraya kurulur:
+                Engines are installed to:
                 \(Paths.engines.path)
                 """)
         } actions: {
-            Button("Yenile") { store.reload() }
+            Button("Reload") { store.reload() }
                 .keyboardShortcut("r")
-            Button("Klasörü Aç") { store.reveal(Paths.engines) }
+            Button("Open Folder") { store.reveal(Paths.engines) }
         }
     }
 }
@@ -111,12 +113,16 @@ private struct OpenWithView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(store.pendingOpen.count == 1
-                 ? "“\(store.pendingOpen[0].lastPathComponent)” hangi bottle'da çalışsın?"
-                 : "\(store.pendingOpen.count) dosya hangi bottle'da çalışsın?")
-                .font(.headline)
+            Group {
+                if store.pendingOpen.count == 1 {
+                    Text("Which bottle should “\(store.pendingOpen[0].lastPathComponent)” run in?")
+                } else {
+                    Text("Which bottle should these \(store.pendingOpen.count) files run in?")
+                }
+            }
+            .font(.headline)
             if store.bottles.isEmpty {
-                Text("Önce bir bottle oluşturmalısın.").foregroundStyle(.secondary)
+                Text("Create a bottle first.").foregroundStyle(.secondary)
             }
             ForEach(store.bottles) { bottle in
                 Button {
@@ -131,7 +137,7 @@ private struct OpenWithView: View {
             }
             HStack {
                 Spacer()
-                Button("Vazgeç", role: .cancel) { store.pendingOpen = [] }
+                Button("Cancel", role: .cancel) { store.pendingOpen = [] }
                     .keyboardShortcut(.cancelAction)
             }
         }

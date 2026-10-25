@@ -14,44 +14,44 @@ struct BottleSettingsView: View {
     var body: some View {
         VStack(spacing: 0) {
             Form {
-                Section("Genel") {
-                    TextField("Ad", text: $draft.name)
-                    Picker("Windows sürümü", selection: $draft.windowsVersion) {
+                Section("General") {
+                    TextField("Name", text: $draft.name)
+                    Picker("Windows version", selection: $draft.windowsVersion) {
                         ForEach(WindowsVersion.allCases) { Text($0.title).tag($0) }
                     }
                 }
 
                 Section {
-                    Picker("Grafik katmanı", selection: $draft.backend) {
+                    Picker("Graphics layer", selection: $draft.backend) {
                         ForEach(GraphicsBackend.allCases) { backend in
                             Text(backend.title).tag(backend)
                         }
                     }
                     if !store.hasEngine(family: draft.engineFamily, backend: draft.backend) {
-                        Label("Bu katman için motor kurulu değil.", systemImage: "exclamationmark.triangle.fill")
+                        Label("No engine is installed for this layer.", systemImage: "exclamationmark.triangle.fill")
                             .foregroundStyle(.orange)
                     }
-                    Toggle("Retina modu", isOn: $draft.retinaMode)
-                    Toggle("Metal HUD (FPS göstergesi)", isOn: $draft.metalHUD)
+                    Toggle("Retina mode", isOn: $draft.retinaMode)
+                    Toggle("Metal HUD (FPS counter)", isOn: $draft.metalHUD)
                 } header: {
-                    Text("Grafik")
+                    Text("Graphics")
                 } footer: {
-                    Text(draft.backend.detail + " Retina modu keskin ama daha ağırdır; yavaş oyunlarda kapalı tut.")
+                    Text("\(draft.backend.detail) Retina mode is sharper but heavier; keep it off in slow games.")
                         .foregroundStyle(.secondary)
                 }
 
                 Section {
                     Toggle("MSync", isOn: $draft.msync)
-                    Toggle("Ayrıntılı log", isOn: $draft.verboseLog)
+                    Toggle("Verbose logging", isOn: $draft.verboseLog)
                 } header: {
-                    Text("Performans ve hata ayıklama")
+                    Text("Performance and Debugging")
                 } footer: {
-                    Text("MSync, Windows senkronizasyonunu macOS çekirdeğinde yapar ve çoğu oyunu hızlandırır. Ayrıntılı log sorun ararken işe yarar ama programları yavaşlatabilir.")
+                    Text("MSync handles Windows synchronization in the macOS kernel and speeds up most games. Verbose logging helps when tracking down a problem but can slow programs down.")
                         .foregroundStyle(.secondary)
                 }
 
                 Section("Steam") {
-                    TextField("Başlatma argümanları", text: $draft.steamArguments)
+                    TextField("Launch arguments", text: $draft.steamArguments)
                         .font(.body.monospaced())
                 }
             }
@@ -59,9 +59,9 @@ struct BottleSettingsView: View {
 
             HStack {
                 Spacer()
-                Button("Vazgeç", role: .cancel) { dismiss() }
+                Button("Cancel", role: .cancel) { dismiss() }
                     .keyboardShortcut(.cancelAction)
-                Button("Kaydet") {
+                Button("Save") {
                     var saved = draft
                     saved.name = saved.name.trimmingCharacters(in: .whitespaces)
                     Task { await store.save(saved, previous: original) }

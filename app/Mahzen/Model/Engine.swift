@@ -16,9 +16,9 @@ enum GraphicsBackend: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var detail: String {
         switch self {
-        case .d3dmetal: "DirectX 11/12 → Metal (Apple). DirectX 12 oyunlar için; bazı DX11 oyunlarda çöküyor (ör. Kenshi)."
-        case .dxmt: "DirectX 10/11 → Metal (açık kaynak). DirectX 11 oyunlar için önerilen."
-        case .wined3d: "DirectX → OpenGL. Yavaş ama en uyumlu; eski oyunlar için."
+        case .d3dmetal: String(localized: "DirectX 11/12 → Metal (Apple). For DirectX 12 games; some DX11 games crash on it (e.g. Kenshi).")
+        case .dxmt: String(localized: "DirectX 10/11 → Metal (open source). Recommended for DirectX 11 games.")
+        case .wined3d: String(localized: "DirectX → OpenGL. Slow but the most compatible; for older games.")
         }
     }
 }

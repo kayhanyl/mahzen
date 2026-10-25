@@ -6,7 +6,8 @@ Mahzen ("cellar" in Turkish) is a SwiftUI app plus scripts that build its own Wi
 It is a personal learning project. It runs Steam and plays Kenshi and Half-Life on an
 M4 Pro with macOS 27, and that is about as far as it has been tested.
 
-The app UI is in Turkish.
+The app is in English and Turkish and follows the system language. To pick one for Mahzen
+only, use System Settings → General → Language & Region → Applications.
 
 ## What it does
 

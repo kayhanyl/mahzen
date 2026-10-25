@@ -7,8 +7,8 @@ struct EnginesView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if store.engines.isEmpty {
-                ContentUnavailableView("Motor yok", systemImage: "shippingbox",
-                                       description: Text("engine/package.sh motorları \(Paths.engines.path) klasörüne kurar."))
+                ContentUnavailableView("No Engines", systemImage: "shippingbox",
+                                       description: Text("engine/package.sh installs engines into \(Paths.engines.path)."))
             } else {
                 Form {
                     ForEach(store.families, id: \.self) { family in
@@ -28,9 +28,9 @@ struct EnginesView: View {
             }
 
             HStack {
-                Button("Yenile", systemImage: "arrow.clockwise") { store.reload() }
+                Button("Reload", systemImage: "arrow.clockwise") { store.reload() }
                 Spacer()
-                Button("Klasörü Aç", systemImage: "folder") { store.reveal(Paths.engines) }
+                Button("Open Folder", systemImage: "folder") { store.reveal(Paths.engines) }
             }
             .padding(16)
         }

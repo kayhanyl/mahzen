@@ -27,9 +27,9 @@ struct BottleDetailView: View {
                 } else if !bottle.isInitialized {
                     banner {
                         Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.yellow)
-                        Text("Bu bottle henüz hazırlanmamış.")
+                        Text("This bottle hasn’t been set up yet.")
                         Spacer()
-                        Button("Hazırla") { Task { await store.initialize(bottle) } }
+                        Button("Set Up") { Task { await store.initialize(bottle) } }
                     }
                 } else {
                     steamSection
@@ -45,7 +45,7 @@ struct BottleDetailView: View {
                 RoundedRectangle(cornerRadius: 14)
                     .strokeBorder(.tint, style: StrokeStyle(lineWidth: 3, dash: [10, 6]))
                     .background(.tint.opacity(0.08), in: RoundedRectangle(cornerRadius: 14))
-                    .overlay(Label("Çalıştırmak için bırak", systemImage: "play.circle").font(.title2))
+                    .overlay(Label("Drop to Run", systemImage: "play.circle").font(.title2))
                     .padding(8)
             }
         }
@@ -58,10 +58,10 @@ struct BottleDetailView: View {
         .toolbar { toolbar }
         .sheet(isPresented: $showSettings) { BottleSettingsView(bottle: bottle) }
         .sheet(isPresented: $showLogs) { LogView(bottle: bottle) }
-        .confirmationDialog("“\(bottle.name)” silinsin mi?", isPresented: $confirmDelete) {
-            Button("Bottle'ı Sil", role: .destructive) { Task { await store.delete(bottle) } }
+        .confirmationDialog("Delete “\(bottle.name)”?", isPresented: $confirmDelete) {
+            Button("Delete Bottle", role: .destructive) { Task { await store.delete(bottle) } }
         } message: {
-            Text("İçindeki tüm programlar, oyunlar ve kayıtlar kalıcı olarak silinir.")
+            Text("All programs, games and saves in it are deleted permanently.")
         }
         .task(id: store.revision) { await rescan() }
         .navigationTitle(bottle.name)
@@ -82,7 +82,7 @@ struct BottleDetailView: View {
                     tag(bottle.engineFamily, "shippingbox")
                     tag(bottle.backend.title, "cpu")
                     tag(bottle.windowsVersion.title, "macwindow")
-                    if store.isRunning(bottle) { tag("Çalışıyor", "circle.fill", tint: .green) }
+                    if store.isRunning(bottle) { tag(String(localized: "Running"), "circle.fill", tint: .green) }
                 }
             }
         }
@@ -96,13 +96,13 @@ struct BottleDetailView: View {
                     Button {
                         store.launchSteam(in: bottle)
                     } label: {
-                        Label("Steam'i Aç", systemImage: "play.fill")
+                        Label("Open Steam", systemImage: "play.fill")
                     }
                     .controlSize(.large)
                     .buttonStyle(.borderedProminent)
 
                     if games.isEmpty {
-                        Text("Kurulu oyun yok. Steam'i açıp bir oyun kurduğunda burada görünecek.")
+                        Text("No games installed yet. Open Steam and install one, and it will show up here.")
                             .foregroundStyle(.secondary)
                     } else {
                         LazyVGrid(columns: [GridItem(.adaptive(minimum: 220, maximum: 300), spacing: 16)], spacing: 16) {
@@ -114,12 +114,12 @@ struct BottleDetailView: View {
                 }
             } else {
                 HStack {
-                    Text("Steam bu bottle'da kurulu değil.").foregroundStyle(.secondary)
+                    Text("Steam isn’t installed in this bottle.").foregroundStyle(.secondary)
                     Spacer()
                     Button {
                         Task { await store.installSteam(in: bottle) }
                     } label: {
-                        Label("Steam'i Kur", systemImage: "arrow.down.circle")
+                        Label("Install Steam", systemImage: "arrow.down.circle")
                     }
                 }
             }
@@ -128,17 +128,17 @@ struct BottleDetailView: View {
 
     @ViewBuilder
     private var pinnedSection: some View {
-        section("Programlar", systemImage: "square.grid.2x2") {
+        section("Programs", systemImage: "square.grid.2x2") {
             if bottle.programs.isEmpty {
-                Text("Sabitlenmiş program yok. Aşağıdan bir program sabitle ya da “Program Çalıştır…” ile bir .exe aç.")
+                Text("No pinned programs. Pin one from the list below, or open an .exe with “Run Program…”.")
                     .foregroundStyle(.secondary)
             } else {
                 VStack(spacing: 0) {
                     ForEach(bottle.programs) { program in
                         ProgramRow(program: program) {
-                            Button("Kaldır", systemImage: "pin.slash") { store.unpin(program, in: bottle) }
+                            Button("Unpin", systemImage: "pin.slash") { store.unpin(program, in: bottle) }
                                 .labelStyle(.iconOnly)
-                                .help("Sabitlemeyi kaldır")
+                                .help("Remove from Programs")
                         } play: {
                             store.run(program, in: bottle)
                         }
@@ -155,13 +155,13 @@ struct BottleDetailView: View {
         let pinned = Set(bottle.programs.map(\.path))
         let candidates = discovered.filter { !pinned.contains($0.path) }
         if !candidates.isEmpty {
-            section("Bulunan Programlar", systemImage: "magnifyingglass") {
+            section("Found Programs", systemImage: "magnifyingglass") {
                 VStack(spacing: 0) {
                     ForEach(candidates) { program in
                         ProgramRow(program: program) {
-                            Button("Sabitle", systemImage: "pin") { store.pin(program, in: bottle) }
+                            Button("Pin", systemImage: "pin") { store.pin(program, in: bottle) }
                                 .labelStyle(.iconOnly)
-                                .help("Programlara sabitle")
+                                .help("Pin to Programs")
                         } play: {
                             store.run(program, in: bottle)
                         }
@@ -179,36 +179,36 @@ struct BottleDetailView: View {
             Button {
                 showImporter = true
             } label: {
-                Label("Program Çalıştır…", systemImage: "plus.app")
+                Label("Run Program…", systemImage: "plus.app")
             }
-            .help("Bir .exe veya .msi dosyası çalıştır")
+            .help("Run an .exe or .msi file")
             .disabled(!bottle.isInitialized)
 
             Button {
                 showSettings = true
             } label: {
-                Label("Ayarlar", systemImage: "slider.horizontal.3")
+                Label("Settings", systemImage: "slider.horizontal.3")
             }
-            .help("Bottle ayarları")
+            .help("Bottle settings")
 
             Menu {
-                Section("Wine araçları") {
-                    Button("Wine Ayarları (winecfg)") { store.runTool("winecfg", in: bottle) }
-                    Button("Kayıt Defteri (regedit)") { store.runTool("regedit", in: bottle) }
-                    Button("Görev Yöneticisi (taskmgr)") { store.runTool("taskmgr", in: bottle) }
-                    Button("Dosya Gezgini (explorer)") { store.runTool("explorer", in: bottle) }
+                Section("Wine Tools") {
+                    Button("Wine Configuration (winecfg)") { store.runTool("winecfg", in: bottle) }
+                    Button("Registry Editor (regedit)") { store.runTool("regedit", in: bottle) }
+                    Button("Task Manager (taskmgr)") { store.runTool("taskmgr", in: bottle) }
+                    Button("File Explorer (explorer)") { store.runTool("explorer", in: bottle) }
                 }
                 .disabled(!bottle.isInitialized)
                 Divider()
-                Button("C: Sürücüsünü Finder'da Aç", systemImage: "folder") { store.reveal(bottle.driveC) }
-                Button("Logları Göster", systemImage: "doc.text.magnifyingglass") { showLogs = true }
+                Button("Open C: Drive in Finder", systemImage: "folder") { store.reveal(bottle.driveC) }
+                Button("Show Logs", systemImage: "doc.text.magnifyingglass") { showLogs = true }
                 Divider()
-                Button("Tümünü Durdur", systemImage: "stop.circle") { Task { await store.stop(bottle) } }
-                Button("Bottle'ı Sil…", systemImage: "trash", role: .destructive) { confirmDelete = true }
+                Button("Stop All", systemImage: "stop.circle") { Task { await store.stop(bottle) } }
+                Button("Delete Bottle…", systemImage: "trash", role: .destructive) { confirmDelete = true }
             } label: {
-                Label("Araçlar", systemImage: "wrench.and.screwdriver")
+                Label("Tools", systemImage: "wrench.and.screwdriver")
             }
-            .help("Araçlar")
+            .help("Tools")
         }
     }
 
@@ -230,7 +230,7 @@ struct BottleDetailView: View {
         discovered = result.1
     }
 
-    private func section<Content: View>(_ title: String, systemImage: String,
+    private func section<Content: View>(_ title: LocalizedStringKey, systemImage: String,
                                         @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 12) {
             Label(title, systemImage: systemImage).font(.title2.bold())
@@ -275,10 +275,10 @@ private struct ProgramRow<Accessory: View>: View {
             }
             Spacer()
             accessory.buttonStyle(.borderless)
-            Button("Başlat", systemImage: "play.fill", action: play)
+            Button("Run", systemImage: "play.fill", action: play)
                 .labelStyle(.iconOnly)
                 .buttonStyle(.borderless)
-                .help("Başlat")
+                .help("Run")
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
@@ -315,6 +315,6 @@ private struct GameCard: View {
         }
         .buttonStyle(.plain)
         .onHover { hovering = $0 }
-        .help("\(game.name) oyununu başlat")
+        .help("Play \(game.name)")
     }
 }

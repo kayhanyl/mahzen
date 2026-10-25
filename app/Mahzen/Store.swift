@@ -8,7 +8,7 @@ final class Store {
     var selection: Bottle.ID?
     /// Live `wine` processes started from the app, per bottle.
     var running: [Bottle.ID: Int] = [:]
-    /// What a bottle is busy with ("Steam kuruluyor…"), shown instead of its actions.
+    /// What a bottle is busy with ("Installing Steam…"), shown instead of its actions.
     var busy: [Bottle.ID: String] = [:]
     /// .exe/.msi files opened from Finder, waiting for the user to pick a bottle.
     var pendingOpen: [URL] = []
@@ -82,7 +82,7 @@ final class Store {
     }
 
     func initialize(_ bottle: Bottle) async {
-        await perform(bottle, "Bottle hazırlanıyor… (ilk seferde bir dakika sürebilir)") {
+        await perform(bottle, String(localized: "Setting up the bottle… (the first time can take a minute)")) {
             try await runner(for: bottle).initialize()
         }
     }
@@ -104,7 +104,7 @@ final class Store {
         let needsRegistry = bottle.windowsVersion != previous.windowsVersion || bottle.retinaMode != previous.retinaMode
         let backendChanged = bottle.backend != previous.backend
         guard needsRegistry || backendChanged else { return }
-        await perform(bottle, "Ayarlar uygulanıyor…") {
+        await perform(bottle, String(localized: "Applying settings…")) {
             // Processes from the old engine variant would keep its DLLs loaded.
             if backendChanged, let old = try? runner(for: previous) { await old.stop() }
             let r = try runner(for: bottle)
@@ -126,7 +126,7 @@ final class Store {
     }
 
     func stop(_ bottle: Bottle) async {
-        await perform(bottle, "Durduruluyor…") {
+        await perform(bottle, String(localized: "Stopping…")) {
             try await runner(for: bottle).stop()
         }
         running[bottle.id] = nil
@@ -196,16 +196,16 @@ final class Store {
     // MARK: - Steam
 
     func installSteam(in bottle: Bottle) async {
-        await perform(bottle, "Steam indiriliyor…") {
+        await perform(bottle, String(localized: "Downloading Steam…")) {
             let setup = try await Steam.downloadInstaller()
-            busy[bottle.id] = "Steam kuruluyor…"
+            busy[bottle.id] = String(localized: "Installing Steam…")
             // The installer starts Steam by itself when it finishes, so the DLL setup and
             // environment have to be in place before it runs, not before our first launch.
             let r = try runner(for: bottle)
             try await r.prepareSteam()
             let code = try await r.run([setup.path, "/S"], in: Paths.cache, logName: "steam-setup",
                                        extraEnvironment: Steam.environment)
-            guard bottle.hasSteam else { throw WineError.failed("Steam kurulumu", code) }
+            guard bottle.hasSteam else { throw WineError.failed(String(localized: "Steam installation"), code) }
         }
     }
 
@@ -221,7 +221,7 @@ final class Store {
     /// between launches, and a prefix update can put Wine's placeholders back.
     private func startSteam(_ bottle: Bottle, _ arguments: [String], logName: String) {
         Task {
-            guard await perform(bottle, "Steam hazırlanıyor…", {
+            guard await perform(bottle, String(localized: "Preparing Steam…"), {
                 try await runner(for: bottle).prepareSteam()
             }) else { return }
             launch(bottle, [bottle.steamExe.path] + arguments, in: bottle.steamExe.deletingLastPathComponent(),
