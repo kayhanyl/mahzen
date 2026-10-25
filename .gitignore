@@ -1,0 +1,8 @@
+engine/build/
+.DS_Store
+xcuserdata/
+*.xcodeproj/project.xcworkspace/
+DerivedData/
+app/build/
+app/Mahzen.xcodeproj/
+.hallmark/

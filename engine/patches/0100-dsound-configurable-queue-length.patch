@@ -1,0 +1,80 @@
+Subject: [PATCH] dsound: make the queued audio length configurable (SndQueueMax)
+
+Wine keeps three periods (30 ms) queued in the audio client. Under Rosetta a
+32-bit WoW64 game misses that deadline and the output crackles. Older Wine
+read HKCU\Software\Wine\DirectSound\SndQueueMax for this; bring it back,
+default unchanged.
+
+diff --color -ru a/dlls/dsound/dsound_main.c b/dlls/dsound/dsound_main.c
+--- a/dlls/dsound/dsound_main.c	2026-10-24 15:32:50
++++ b/dlls/dsound/dsound_main.c	2026-10-24 15:32:50
+@@ -81,6 +81,8 @@
+ 
+ /* All default settings, you most likely don't want to touch these, see wiki on UsefulRegistryKeys */
+ int ds_hel_buflen = 32768 * 2;
++/* periods of audio kept queued in the audio client; more survives scheduling hiccups */
++int ds_snd_queue_max = 3;
+ 
+ /*
+  * Get a config key from either the app-specific or the default config
+@@ -132,10 +134,14 @@
+     if (!get_config_key( hkey, appkey, "HelBuflen", buffer, MAX_PATH ))
+         ds_hel_buflen = atoi(buffer);
+ 
++    if (!get_config_key( hkey, appkey, "SndQueueMax", buffer, MAX_PATH ))
++        ds_snd_queue_max = max( 3, min( 16, atoi(buffer) ) );
++
+     if (appkey) RegCloseKey( appkey );
+     if (hkey) RegCloseKey( hkey );
+ 
+     TRACE("ds_hel_buflen = %d\n", ds_hel_buflen);
++    TRACE("ds_snd_queue_max = %d\n", ds_snd_queue_max);
+ }
+ 
+ static const char * get_device_id(LPCGUID pGuid)
+diff --color -ru a/dlls/dsound/dsound_private.h b/dlls/dsound/dsound_private.h
+--- a/dlls/dsound/dsound_private.h	2026-10-24 15:32:50
++++ b/dlls/dsound/dsound_private.h	2026-10-24 15:32:50
+@@ -35,6 +35,7 @@
+ #define DS_MAX_CHANNELS 6
+ 
+ extern int ds_hel_buflen;
++extern int ds_snd_queue_max;
+ 
+ /*****************************************************************************
+  * Predeclare the interface implementation structures
+diff --color -ru a/dlls/dsound/mixer.c b/dlls/dsound/mixer.c
+--- a/dlls/dsound/mixer.c	2026-10-24 15:32:50
++++ b/dlls/dsound/mixer.c	2026-10-24 15:32:50
+@@ -699,8 +699,8 @@
+ 		LeaveCriticalSection(&device->mixlock);
+ 		return;
+ 	}
+-	if (frames > device->frag_frames * 3)
+-		frames = device->frag_frames * 3;
++	if (frames > device->frag_frames * ds_snd_queue_max)
++		frames = device->frag_frames * ds_snd_queue_max;
+ 
+ 	if (device->priolevel != DSSCL_WRITEPRIMARY) {
+ 		BOOL all_stopped = FALSE;
+diff --color -ru a/dlls/dsound/primary.c b/dlls/dsound/primary.c
+--- a/dlls/dsound/primary.c	2026-10-24 15:32:50
++++ b/dlls/dsound/primary.c	2026-10-24 15:32:50
+@@ -286,7 +286,7 @@
+     hres = IAudioClient_Initialize(client,
+             AUDCLNT_SHAREMODE_SHARED, AUDCLNT_STREAMFLAGS_NOPERSIST |
+             AUDCLNT_STREAMFLAGS_EVENTCALLBACK | AUDCLNT_STREAMFLAGS_AUTOCONVERTPCM,
+-            800000, 0, wfx, NULL);
++            max(800000, (ds_snd_queue_max + 2) * 100000), 0, wfx, NULL);
+     if(FAILED(hres)){
+         IAudioClient_Release(client);
+         ERR("Initialize failed: %08lx\n", hres);
+@@ -327,7 +327,7 @@
+     period_ms = (period + 9999) / 10000;
+     frag_frames = MulDiv(wfx->nSamplesPerSec, period, 10000000);
+ 
+-    aclen_frames = min(acbuf_frames, 3 * frag_frames);
++    aclen_frames = min(acbuf_frames, ds_snd_queue_max * frag_frames);
+ 
+     TRACE("period %lu ms frag_frames %lu buf_frames %u\n", period_ms, frag_frames, aclen_frames);
+ 

@@ -1,0 +1,52 @@
+/* Hallmark · tokens · theme: Midnight (anchor hue 15, wine — matches the app icon) */
+:root {
+  /* paper → ink, tinted toward the wine anchor */
+  --color-paper:    oklch(14% 0.012 15);
+  --color-paper-2:  oklch(18% 0.016 15);
+  --color-paper-3:  oklch(22% 0.020 15);
+  --color-rule:     oklch(32% 0.016 15);
+  --color-neutral:  oklch(64% 0.012 15);
+  --color-muted:    oklch(76% 0.010 15);
+  --color-ink:      oklch(94% 0.008 30);
+
+  /* one accent: the rose of the icon's glass, lifted for dark paper */
+  --color-accent:   oklch(74% 0.13 15);
+  --color-focus:    oklch(80% 0.12 15);
+  /* canvas blooms only — never on text */
+  --color-bloom:    oklch(36% 0.13 12);
+  --color-bloom-2:  oklch(30% 0.09 40);
+
+  --font-display: "Tomorrow", ui-sans-serif, sans-serif;
+  --font-body:    "Geist", ui-sans-serif, sans-serif;
+  --font-mono:    "Geist Mono", ui-monospace, monospace;
+
+  --text-xs:   0.8rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-md:   1.25rem;
+  --text-xl:   1.9531rem;
+  --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+
+  --space-2xs: 0.25rem;
+  --space-xs:  0.5rem;
+  --space-sm:  0.75rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --page-gutter: clamp(1rem, 4vw, 3rem);
+  --page-max: 72rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.75rem;
+  --radius-pill: 999px;
+  --rule-hair: 1px;
+
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long:  420ms;
+}

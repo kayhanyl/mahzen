@@ -1,0 +1,29 @@
+name: Mahzen
+options:
+  bundleIdPrefix: dev.switchalpha
+  deploymentTarget:
+    macOS: "15.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MACOSX_DEPLOYMENT_TARGET: "15.0"
+    CODE_SIGN_IDENTITY: "-"
+    CODE_SIGN_STYLE: Manual
+    ENABLE_HARDENED_RUNTIME: NO
+targets:
+  Mahzen:
+    type: application
+    platform: macOS
+    sources: [Mahzen]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.switchalpha.mahzen
+        PRODUCT_NAME: Mahzen
+        MARKETING_VERSION: "0.1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: Mahzen/Info.plist
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        # Wine has to spawn processes and read the whole prefix, so no sandbox.
+        ENABLE_APP_SANDBOX: NO
